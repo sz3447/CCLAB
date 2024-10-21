@@ -28,6 +28,11 @@ function draw() {
     strokeWeight(2);
     background (0)
     
+  // clicker interactive
+
+  if (mouseIsPressed == true){
+    fill(0,126,78)
+  }
   
   //BACKGROUND PART
   //push function to add thing
