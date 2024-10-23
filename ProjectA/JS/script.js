@@ -76,7 +76,18 @@ function draw() {
   for (let i = 0; i < creatureCircles; i++){
    creatureposition.push(createVector(0,0))
   }
-  colorchange += 1
+
+  
+//unit color change
+
+colorchange +=5
+if((keyIsPressed === true) && (key === 'q')){
+  colorchange +=10
+}
+if((keyIsPressed === true) && (key === 'w')){
+  colorchange -=10
+}
+  
     
   for (let i=0; i < creatureCircles; i++){
      let angle = TWO_PI/creatureCircles * i + change
