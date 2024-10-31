@@ -1,28 +1,50 @@
 let x,y;
+let cloud;
+let cloud2;
 
 function setup() {
     let canvas = createCanvas(400, 400);
     canvas.parent("p5-container");
+    x=width/2;
+    y=height/2;
+    cloud= new Cloud(random(width),0,100);
+    cloud2= new Cloud(random(width),0,50);
 
 }
 
 function draw() {
     background(220);
-    cloud();
-    move();
+    cloud.show();
+    cloud2.show();
 }
 
-function cloud(){
-push();
-translate(x,y);
-noStroke();
-
-circle(0,0,100);
-
-for(let a=0; a<2+PI;a+=PI/6){
+class Cloud{
+    constructor(u,v,s){
+        this.x=u;
+        this.y=v;
+        this.s=s;
+        this.speed=random(0.005,0.01);
+    }
+show(){ 
     push();
-    rotate(a);
-    circle(s*0.5,0,s*0.5 );
+    translate(this.x, this.y);
+    noStroke();
+    //main circle
+    circle(0, 0, this.s);
+    //circles around
+    for(let a=0; a<2*PI;a+=PI/6){
+        push();
+        rotate(a);
+        circle(this.s*0.5, 0, this.s*0.5);
+        pop();
+    } 
+    //face
+    fill(0);
+    circle(-this.s*0.3, 0, this.s*0.05);
+    circle(this.s*0.3, 0, this.s*0.05);
+    arc(0,0,this.s*0.3, this.s*0.3, 0, PI);
     pop();
+
+    this.y=height * noise(frameCount*0.01);
 }
 }
