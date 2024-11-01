@@ -36,29 +36,33 @@ class ShylaDancer {
   constructor(startX, startY) {
     this.x = startX;
     this.y = startY;
-    // add properties for your dancer here:
-    //..
-    //..
-    //..
+    this.angle = 0;
+    this.size = 50;
+    this.color = color(255, 0, 150);
+
+    
   }
   update() {
-    // update properties here to achieve
-    // your dancer's desired moves and behaviour
+    this.angle =+ 0.05;
+    this.x += sin(this.angle)*2;
+
   }
   display() {
-    // the push and pop, along with the translate 
-    // places your whole dancer object at this.x and this.y.
-    // you may change its position on line 19 to see the effect.
     push();
     translate(this.x, this.y);
 
     // ******** //
     // ⬇️ draw your dancer from here ⬇️
+    fill(this.color);
+    stroke(255);
+    strokeWeight(2);
 
-
-
-
-
+    ellipse(0,0, this.size, this.size);
+    rect(-this.size/4, this.size/2, this.size/2, this.size);
+    line ( 0,0, -this.size/2, this.size);
+    line( 0, 0, this.size/2, this.size);
+    line(0, -this.size/2, -this.size, -this.size);
+    line(0, -this.size/2, this.size/2, -this.size);
 
     // ⬆️ draw your dancer above ⬆️
     // ******** //
@@ -69,7 +73,7 @@ class ShylaDancer {
     // it is using "this" because this function, too, 
     // is a part if your Dancer object.
     // comment it out or delete it eventually.
-    this.drawReferenceShapes()
+    //this.drawReferenceShapes()
 
     pop();
   }
