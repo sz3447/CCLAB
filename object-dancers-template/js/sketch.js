@@ -49,7 +49,7 @@ class ShylaDancer {
       arc(0, -60, 60, 40, PI, 0);
       rect(-40, -50, 80, 10); 
     
-    // Draw wiggly limbs
+    //  wiggly limbs
     stroke(255);
     line(-45, 10 + sin(this.limbWiggle) * 10, -70, 20); // Left arm
     line(45, 10 + sin(this.limbWiggle) * 10, 70, 20); // Right arm
