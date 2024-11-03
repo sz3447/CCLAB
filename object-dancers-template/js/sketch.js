@@ -18,8 +18,7 @@ class ShylaDancer {
   constructor(startX, startY) {
     this.x = startX;
     this.y = startY;
-this.angle = 0;
-    this.size = 100; 
+    this.size = 100;
     this.bounceHeight = 5; //set bounce hight
     this.bounceSpeed = 0.1; //set bounce speed
     this.limbWiggle = 0; 
