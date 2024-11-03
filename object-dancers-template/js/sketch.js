@@ -1,14 +1,3 @@
-/*
-  Check our the GOAL and the RULES of this exercise at the bottom of this file.
-  
-  After that, follow these steps before you start coding:
-
-  1. rename the dancer class to reflect your name (line 35).
-  2. adjust line 20 to reflect your dancer's name, too.
-  3. run the code and see if a square (your dancer) appears on the canvas.
-  4. start coding your dancer inside the class that has been prepared for you.
-  5. have fun.
-*/
 
 let dancer;
 
@@ -16,67 +5,73 @@ function setup() {
   // no adjustments in the setup function needed...
   let canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5-canvas-container");
-
-  // ...except to adjust the dancer's name on the next line:
   dancer = new ShylaDancer (width / 2, height / 2);
 }
 
 function draw() {
-  // you don't need to make any adjustments inside the draw loop
   background(0);
-  drawFloor(); // for reference only
-
   dancer.update();
   dancer.display();
 }
 
-// You only code inside this class.
-// Start by giving the dancer your name, e.g. LeonDancer.
 class ShylaDancer {
   constructor(startX, startY) {
     this.x = startX;
     this.y = startY;
-    this.angle = 0;
-    this.size = 50;
-    this.color = color(255, 0, 150);
-
-    
+this.angle = 0;
+    this.size = 100; 
+    this.bounceHeight = 5; //set bounce hight
+    this.bounceSpeed = 0.1; //set bounce speed
+    this.limbWiggle = 0; 
+    this.limbWiggleSpeed = 0.05; // set speed for the limb wiggkles
+    this.color = color(30, 144, 255)
   }
+
   update() {
-    this.angle =+ 0.05;
-    this.x += sin(this.angle)*2;
-
+    this.y += sin(frameCount * this.bounceSpeed) * this.bounceHeight;
+    this.limbWiggle += this.limbWiggleSpeed;
   }
+
   display() {
     push();
     translate(this.x, this.y);
 
-    // ******** //
-    // ⬇️ draw your dancer from here ⬇️
-    fill(this.color);
+     fill(this.color);
+    ellipse(0, 0, this.size, this.size); // Body
+    fill(0);
+    //face
+    ellipse( -20, -5 , 10, 10)
+    ellipse( 20, -5 , 10, 10)
+    arc(0,0,10,40,0,PI)
+    
+    //hat
+    fill(205, 133, 63)
+      rect(-20, -60, 40, 20);
+      arc(0, -60, 60, 40, PI, 0);
+      rect(-40, -50, 80, 10); 
+    
+    // Draw wiggly limbs
     stroke(255);
-    strokeWeight(2);
+    line(-45, 10 + sin(this.limbWiggle) * 10, -70, 20); // Left arm
+    line(45, 10 + sin(this.limbWiggle) * 10, 70, 20); // Right arm
+    line(-15, 50, -15 + sin(this.limbWiggle) * 5, 90); // Left leg
+    line(15, 50, 15 + sin(this.limbWiggle) * 5, 90); // Right leg
+    
 
-    ellipse(0,0, this.size, this.size);
-    rect(-this.size/4, this.size/2, this.size/2, this.size);
-    line ( 0,0, -this.size/2, this.size);
-    line( 0, 0, this.size/2, this.size);
-    line(0, -this.size/2, -this.size, -this.size);
-    line(0, -this.size/2, this.size/2, -this.size);
-
-    // ⬆️ draw your dancer above ⬆️
-    // ******** //
-
-    // the next function draws a SQUARE and CROSS
-    // to indicate the approximate size and the center point
-    // of your dancer.
-    // it is using "this" because this function, too, 
-    // is a part if your Dancer object.
-    // comment it out or delete it eventually.
-    //this.drawReferenceShapes()
-
+//small lasso-thing
+    stroke(128, 0, 0);
+    noFill();
+    beginShape();
+    vertex(70, 10); // Start from the right arm
+    vertex(70, -20); // Draw the lasso curve
+    vertex(90, -10);
+    vertex(70, 0);
+    endShape();
+ 
+    
     pop();
   }
+
   drawReferenceShapes() {
     noFill();
     stroke(255, 0, 0);
@@ -88,8 +83,6 @@ class ShylaDancer {
     stroke(0);
   }
 }
-
-
 
 /*
 GOAL:
