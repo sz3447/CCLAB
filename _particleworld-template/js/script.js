@@ -40,8 +40,9 @@ class Particle {
     this.dia = random(10,30);
     this.shape = random() > 0.5 ? "ellipse" : "rectangle";
 
-    this.speedx = random(-3,3);
-    this.speedy = random(-3,3);
+
+    this.vx = random(-3,3);
+    this.vy = random(-3,3);
 
     this.r = random(255);
     this.g = random(255);
@@ -49,8 +50,8 @@ class Particle {
   }
   // methods (functions): particle's behaviors
   update() {
-    this.x += this.speedx;
-    this.y += this.speedy;
+    this.x += this.vx;
+    this.y += this.vy;
   
     //colorchange per frame
     this.r = (this.r + random(-5,5)) % 255;
