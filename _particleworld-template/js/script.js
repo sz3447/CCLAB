@@ -1,79 +1,70 @@
-// CCLab Mini Project - 9.R Particle World Template
-
-let NUM_OF_PARTICLES = 3; // Decide the initial number of particles.
-
+let NUM_OF_PARTICLES = 100; // Number of particles per click
 let particles = [];
 
 function setup() {
   let canvas = createCanvas(800, 600);
   canvas.parent("p5-canvas-container");
-
-  // generate particles
-  for (let i = 0; i < NUM_OF_PARTICLES; i++) {
-    particles[i] = new Particle(random(width), random(height));
-  }
 }
 
 function draw() {
-  background(50, 50, 50, 25);
+  background(50, 50, 50, 25); 
 
-  // update and display
-  for (let i = 0; i < particles.length; i++) {
+  for (let i = particles.length - 1; i >= 0; i--) {
     let p = particles[i];
     p.update();
     p.display();
+
+   
   }
 }
 
-function mousePressed(){
-  for(let i = 0; 1 < NUM_OF_PARTICLES; i++){
+function mousePressed() {
+  for (let i = 0; i < NUM_OF_PARTICLES; i++) {
     particles.push(new Particle(mouseX, mouseY));
   }
 }
 
 class Particle {
-  // constructor function
   constructor(startX, startY) {
-    // properties (variables): particle's characteristics
+
     this.x = startX;
     this.y = startY;
-    this.dia = random(10,30);
-    this.shape = random() > 0.5 ? "ellipse" : "rectangle";
+    this.dia = random(10, 30); 
+    this.shape = random() > 0.5 ? "ellipse" : "rectangle"; // Random shape
 
-
-    this.vx = random(-3,3);
-    this.vy = random(-3,3);
+    this.vx = random(-3, 3);
+    this.vy = random(-3, 3);
 
     this.r = random(255);
     this.g = random(255);
     this.b = random(255);
   }
-  // methods (functions): particle's behaviors
+
   update() {
     this.x += this.vx;
     this.y += this.vy;
-  
-    //colorchange per frame
-    this.r = (this.r + random(-5,5)) % 255;
-    this.g = (this.g + random(-5,5)) % 255;
-    this.b = (this.b + random(-5,5)) % 255;
+
+    //random color change by fgrame
+    this.r = (this.r + random(-5, 5)) % 255;
+    this.g = (this.g + random(-5, 5)) % 255;
+    this.b = (this.b + random(-5, 5)) % 255;
   }
+
   display() {
-    // particle's appearance
     push();
     translate(this.x, this.y);
-
-    fill (this.r, this.g, this.b);
+    fill(this.r, this.g, this.b);
     noStroke();
 
-    //draw either ellipse or rectange
-    if(this.shape === "ellipse"){
-      ellipse (0,0, this.dia);
+//draw ellipse or rectiange
+    if (this.shape === "ellipse") {
+      ellipse(0, 0, this.dia);
     } else {
       rectMode(CENTER);
-      rect (0,0, this.dia, this.dia);
+      rect(0, 0, this.dia, this.dia);
     }
-
     pop();
   }
+
+
 }
