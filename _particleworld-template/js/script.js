@@ -48,7 +48,7 @@ class Particle {
   update() {
     this.x += this.speedx;
     this.y += this.speedy;
-    this.life -= 2;
+    this.life -= 0.2;
 
     //random color change by fgrame
     this.r = (this.r + random(-5, 5)) % 255;
