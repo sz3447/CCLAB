@@ -14,6 +14,10 @@ function draw() {
     p.update();
     p.display();
     p.checkBounds();
+
+    if (p.life <= 0) {
+      particles.splice(i, 1);
+    }
    
   }
 }
@@ -44,6 +48,7 @@ class Particle {
   update() {
     this.x += this.speedx;
     this.y += this.speedy;
+    this.life -= 2;
 
     //random color change by fgrame
     this.r = (this.r + random(-5, 5)) % 255;
@@ -66,7 +71,7 @@ class Particle {
   display() {
     push();
     translate(this.x, this.y);
-    fill(this.r, this.g, this.b);
+    fill(this.r, this.g, this.b, this.life);
     noStroke();
 
 //draw ellipse or rectiange
