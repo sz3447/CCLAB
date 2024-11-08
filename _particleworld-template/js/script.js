@@ -3,6 +3,7 @@ let particles = [];
 
 function setup() {
   let canvas = createCanvas(800, 600);
+  canvas.parent("p5-canvas-container");
 }
 
 function draw() {
