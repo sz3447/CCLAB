@@ -1,0 +1,27 @@
+html {
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+  
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Rationale", serif;
+}
+
+.items-menu{
+    display: inline-block;
+    position: fixed;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: white;
+    border: black;
+    position: center bottom;
+}
+
+.item1-box{
+    
+}
