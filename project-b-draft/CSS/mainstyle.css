@@ -51,6 +51,11 @@ body{
     background-color: #cdcddb;
 }
 
+.slot.selected{
+    border-color: goldenrod;
+    box-shadow: 0,0, 10px, goldenrod;
+}
+
 
 .slot::after{
     content:"Empty";
