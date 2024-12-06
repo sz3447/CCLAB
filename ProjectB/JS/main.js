@@ -54,6 +54,7 @@ character = new Character();
 function draw() {
   background(44,61,85);
 
+  //camera follow 
   cameraOffset = constrain(character.x - width / 2, 0, 3000 - width);
   translate(-cameraOffset, 0);
 
@@ -166,7 +167,7 @@ function drawInventory() {
   textAlign(LEFT, CENTER);
   text("Inventory", leftMargin / 2, canvasHeight + inventoryheight / 2); 
 
-  fill(80);
+  fill(240, 255, 255);
   for (let i = 0; i < 6; i++) { 
     let x = leftMargin + 6 + i * (inventoryslotsize + 6);
     let y = canvasHeight + (inventoryheight - inventoryslotsize) / 2;
