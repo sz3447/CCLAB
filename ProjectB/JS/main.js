@@ -22,10 +22,10 @@ function setup() {
   let canvas = createCanvas(windowWidth, windowHeight); 
   canvas.parent("p5-canvas-container"); 
 
-//for player moving stuff
-  standingcharacterImg = loadImage('placeholder.jpg');
-  jumpingcharacterImg = loadImage('placeholder.jpg');
-  movingcharacterImg = loadImage('placeholder.jpg');
+//for player moving stuff replace latre (crunchy as hell)
+  standingcharacterImg = loadImage('pngegg.png');
+  jumpingcharacterImg = loadImage('pngegg.png');
+  movingcharacterImg = loadImage('pngegg.png');
 
 //artifact images, placeholders for now
   ArtifactImage['Woodartifact'] = loadImage('artifact 1.png');
@@ -52,7 +52,7 @@ character = new Character();
 }
 
 function draw() {
-  background(44,61,85);
+  background(44,61,85); //will replace with drawing or something
 
   //camera follow 
   cameraOffset = constrain(character.x - width / 2, 0, 3000 - width);
@@ -64,7 +64,7 @@ function draw() {
       currentItem = items[i]; 
       showNavbar = true; 
       items.splice(i, 1); 
-      collectitem = false; //no collection until the item is collected
+      collectitem = false; //so the second one cant be collected until the first item is put away
     }
   }
 
@@ -81,10 +81,9 @@ function draw() {
 
 class Character {
   constructor() {
-    this.x = 100;
     this.y = canvasHeight - 30; 
-    this.w = 30;
-    this.h = 30;
+    this.w = 100;
+    this.h = 100;
     this.velocityY = 0;
     this.isOnGround = false;
     this.facingRight = true; 
@@ -114,6 +113,7 @@ class Character {
     }
   }
 
+  //maybe change to WASD later...ya
   show() {
     if (this.velocityY < 0) { 
       image(jumpingcharacterImg, this.x, this.y, this.w, this.h);
