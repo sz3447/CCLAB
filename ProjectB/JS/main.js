@@ -199,7 +199,7 @@ function drawNavbar() {
     fill(255);
     textSize(20);
     textAlign(CENTER, CENTER);
-    text("You have found an artifact! Choose an option.", navbarX + navbarWidth / 2, navbarY + navbarHeight / 2);
+    text("You have found an artifact! Choose an option to proceed.", navbarX + navbarWidth / 2, navbarY + navbarHeight / 2);
   
 //left button for the inventory
     fill(255);
