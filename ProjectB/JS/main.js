@@ -35,12 +35,12 @@ BGImage = loadImage('backgroundimage.png')
 //for book image
 finalbookImage = loadImage('finalbook.png');
 
-//for player moving stuff replace latre (crunchy as hell)
+//for player moving stuff replace latre (crunchy as hell)https://masterpose.itch.io/pixelduuuuudesmaker
   standingcharacterImg = loadImage('characterstanding.png');
   jumpingcharacterImg = loadImage('characterjumping.png');
   movingcharacterImg = loadImage('charactermoving.png');
 
-//artifact images, placeholders for now
+//artifact images
   ArtifactImage['Woodartifact'] = loadImage('woodartifact.png');
   ArtifactImage['Paperartifact'] = loadImage('paperartifact.png');
   ArtifactImage['Glassartifact'] = loadImage('glassartifact.png');
