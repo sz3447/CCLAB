@@ -30,21 +30,22 @@ function setup() {
   canvasHeight = windowHeight - inventoryheight; 
   let canvas = createCanvas(windowWidth, windowHeight); 
   canvas.parent("p5-canvas-container"); 
-
+//bg image
+BGImage = loadImage('backgroundimage.png')
 //for book image
-finalbookImage = loadImage('placeholder.jpg');
+finalbookImage = loadImage('finalbook.png');
 
 //for player moving stuff replace latre (crunchy as hell)
-  standingcharacterImg = loadImage('pngegg.png');
-  jumpingcharacterImg = loadImage('pngegg.png');
-  movingcharacterImg = loadImage('pngegg.png');
+  standingcharacterImg = loadImage('characterstanding.png');
+  jumpingcharacterImg = loadImage('characterjumping.png');
+  movingcharacterImg = loadImage('charactermoving.png');
 
 //artifact images, placeholders for now
-  ArtifactImage['Woodartifact'] = loadImage('artifact 1.png');
-  ArtifactImage['Paperartifact'] = loadImage('artifact 2.jpg');
-  ArtifactImage['Glassartifact'] = loadImage('artifact 3.png');
-  ArtifactImage['Metalartifact'] = loadImage('artifact 4.jpg');
-  ArtifactImage['Potteryartifact'] = loadImage('artifact 5.png');
+  ArtifactImage['Woodartifact'] = loadImage('woodartifact.png');
+  ArtifactImage['Paperartifact'] = loadImage('paperartifact.png');
+  ArtifactImage['Glassartifact'] = loadImage('glassartifact.png');
+  ArtifactImage['Metalartifact'] = loadImage('metalartifact.png');
+  ArtifactImage['Potteryartifact'] = loadImage('potteryartifact.png');
 
 character = new Character();
 
@@ -63,7 +64,7 @@ character = new Character();
 }
 
 function draw() {
-  background(44,61,85); //will replace with drawing or something
+  background(BGImage); 
 
   //camera follow and check if item list empty
   if (!allitemscollected) {
@@ -108,20 +109,21 @@ class Character {
   constructor() {
     this.x = 100;
     this.y = canvasHeight - 30; 
-    this.w = 100;
+    this.w = 75;
     this.h = 100;
     this.velocityY = 0;
     this.isOnGround = false;
     this.facingRight = true; 
   }
 
-  //maybe change to WASD later...ya
+
+  //https://stackoverflow.com/questions/64573609/up-and-down-movement-in-p5-js-and-using-wasd; https://www.toptal.com/developers/keycode/a
   update() {
-    if (keyIsDown(LEFT_ARROW)) {
+    if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) {
       this.x -= 5;
       this.facingRight = false; 
     }
-    if (keyIsDown(RIGHT_ARROW)) {
+    if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
       this.x += 5;
       this.facingRight = true; 
     }
@@ -144,7 +146,7 @@ class Character {
   show() {
     if (this.velocityY < 0) { 
       image(jumpingcharacterImg, this.x, this.y, this.w, this.h);
-    } else if (this.isOnGround && (keyIsDown(LEFT_ARROW) || keyIsDown(RIGHT_ARROW))) { 
+    } else if (this.isOnGround && (keyIsDown(LEFT_ARROW) || keyIsDown(65) || keyIsDown(68) || keyIsDown(RIGHT_ARROW))) { 
       image(movingcharacterImg, this.x, this.y, this.w, this.h);
     } else { 
       image(standingcharacterImg, this.x, this.y, this.w, this.h);
@@ -160,8 +162,8 @@ class Item {
   constructor(x, y, type) {
     this.x = x;
     this.y = y;
-    this.w = 30;
-    this.h = 30;
+    this.w = 75;
+    this.h = 75;
     this.type = type;
   }
 
@@ -185,7 +187,7 @@ function drawInventory() {
   resetMatrix(); 
 
   //backgroiund
-  fill(50);
+  fill(16,30, 39);
   rect(0, canvasHeight, width, inventoryheight);
 
 //text
@@ -194,15 +196,16 @@ function drawInventory() {
   textAlign(LEFT, CENTER);
   text("Inventory", leftMargin / 2, canvasHeight + inventoryheight / 2); 
 
+//inventory slots
   fill(240, 255, 255);
-  for (let i = 0; i < 6; i++) { 
-    let x = leftMargin + 6 + i * (inventoryslotsize + 6);
+  for (let i = 0; i < 5; i++) { 
+    let x = leftMargin + 5 + i * (inventoryslotsize + 5);
     let y = canvasHeight + (inventoryheight - inventoryslotsize) / 2;
     rect(x, y, inventoryslotsize, inventoryslotsize);
 
     if (i < inventory.length) {
       let itemType = inventory[i];
-      image(ArtifactImage[itemType], x + inventoryslotsize / 2 - 15, y + inventoryslotsize / 2 - 15, 30, 30);
+      image(ArtifactImage[itemType], x + inventoryslotsize / 2 - 33, y + inventoryslotsize / 2 - 33, 75, 75);
     } else {
       fill(0);
       textSize(16);
@@ -276,7 +279,7 @@ function collectedallartifacts(){
 function drawbutton(){
   resetMatrix();
   fill(0, 0, 0, 150);
-  rect(width/2-100, height/2-30, 200, 100, 100);
+  rect(width/2-206, height/2-30, 400, 75, 100);
 
   //text
   fill(255);
@@ -288,17 +291,17 @@ function drawbutton(){
 function drawfinalwindow(){
   resetMatrix();
   fill(0,0,0, 180);
-  rect(width/2 - 200, height/2 - 200, 400, 200);
+  rect(width/2 - 340, height/2 -100, 700, 75, 100);
 
   //text
   fill(255);
   textSize(23);
   textAlign(CENTER,CENTER);
-  text("You have collected all the artifacts. Here is the solution you seek.", width/2, height/2 - 60);
+  text("This item holds the answers to what you seek. Use it wisely.", width/2, height/2 - 60);
 
   //book image
   if (finalbookImage){
-    image(finalbookImage, width/2-150, height/2 -100, 300, 300);
+    image(finalbookImage, width/2-200, height/2 -30, 400, 400)  ;
   }
 }
 
